@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def authenticate
     un = params.fetch("input_username")
     pw = params.fetch("input_password")
-    user = User. where ({:username =>un}).at(0)
+    user = User.where({:username =>un}).at(0)
 
     if user == nil  
       redirect_to("/user_sing_in", {:alert => "No one by that name 'round these parts"})
