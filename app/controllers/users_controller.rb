@@ -66,7 +66,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    the_id = params.fetch("the_user_id")
+    the_id = session.fetch(:user_id)
     user = User.where({ :id => the_id }).at(0)
 
 
@@ -78,7 +78,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    username = params.fetch("the_username")
+    username = session.fetch(:username)
     user = User.where({ :username => username }).at(0)
 
     user.destroy
