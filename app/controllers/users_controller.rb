@@ -7,6 +7,13 @@ class UsersController < ApplicationController
   def new_registration_form
       render({ :template => "users/signup_form.html.erb"})
   end
+   def new_session_form
+      render({ :template => "users/signin_form.html.erb"})
+  end
+  def toast_cookies
+      reset_session
+      redirect_to("/", {:notice => "see ya later!"})
+  end
   def show
     the_username = params.fetch("the_username")
     @user = User.where({ :username => the_username }).at(0)
@@ -26,6 +33,7 @@ class UsersController < ApplicationController
     save_status = user.save
 
     if save_status == true
+      session.store(:user_id, user.id)
       redirect_to("/users/#{user.username}", {:notice => "Welcome, " + user.username + "!"})
     else
       redirect_to("/user_sign_up", { :alert => user.errors.full_messages.to_sentence})

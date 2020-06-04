@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   get("/user_sign_up", {:controller => "users", :action => "new_registration_form"})
 
+  get("/user_sign_out", {:controller => "users", :action => "toast_cookies"})
+  
+  get("/user_sign_in", {:controller => "users", :action => "new_session_form"})
+
   # CREATE
   get("/insert_user_record", {:controller => "users", :action => "create" })
 
